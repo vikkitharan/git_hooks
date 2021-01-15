@@ -11,7 +11,7 @@
 
 staged_files=$(git diff --name-only --staged | grep -E '\.(c|h|cpp|hpp)$')
 
-CLANG_FORMAT_CONFIG_FILE="scripts/.clang-format"
+CLANG_FORMAT_CONFIG_FILE=".clang-format"
 if [ -n "$staged_files" ]; then
   if [ ! -f $CLANG_FORMAT_CONFIG_FILE ]; then
     printf "Error: missing clang-format configuration file.\n \
@@ -21,12 +21,30 @@ if [ -n "$staged_files" ]; then
     exit 1
   fi
 
-  echo "Formating C/C++ files using clang-formater ..."
+  echo "Formatting C/C++ files using clang-format ..."
 
-  if [ $? -ne 0 ]; then
-    echo "Error: wrong format. The files are formated now. \
-    Please add them by git add -p"
+  bad_format_files=()
+
+  for file in $staged_files; do
+    # 1. git diff get changes in cached files
+    # 2. clang-format-diff.py formats those changes
+    # But changes are not staged automatically
+    if [[ $(git diff -U0 --no-color --cached $file | \
+      ./scripts/clang-format-diff.py -style=file -p1) ]]; then
+
+      bad_format_files+=("${file}")
+      git diff -U0 --no-color --cached $file | \
+        ./scripts/clang-format-diff.py -style=file -p1 -i
+   fi
+  done
+
+  if [ -n "${bad_format_files}" ]; then
+    printf "Error: bad format in \n %s.\n \
+      They are formatted now.\n \
+      Please stage them by git add -p, before commit.\n" \
+      "${bad_format_files[@]}"
 
     exit 1
   fi
+
 fi
