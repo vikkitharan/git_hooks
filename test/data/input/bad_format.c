@@ -4,8 +4,8 @@
 //   Created by: vikgna
 //   Created on: 2021/01/15
 //  Modified by: vikgna
-//  Modified on: 2021/01/15
-//      Version: 0.0.0
+//  Modified on: 2021/01/17
+//      Version: 1.0.0
 //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
 #include "one.h"

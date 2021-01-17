@@ -6,7 +6,7 @@
 #   Created on: 2021/01/16
 #  Modified by: vikgna
 #  Modified on: 2021/01/17
-#      Version: 0.0.0
+#      Version: 1.0.0
 #*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 # Test 1: .clang-format availability and display proper message if it is unavailable
