@@ -1,6 +1,6 @@
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-//         File: one.c
-//               Tests input 
+//         File: bad_format.c
+//               Wrong format C file
 //   Created by: vikgna
 //   Created on: 2021/01/15
 //  Modified by: vikgna

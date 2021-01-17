@@ -6,6 +6,8 @@
 # it wants to stop the commit.
 #
 # To enable this hook, rename this file to "pre-commit".
+
+# Call clang-format script
 ./scripts/format_clang_c_cpp.sh
 
 if [ $? -ne 0 ]; then

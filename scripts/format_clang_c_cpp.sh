@@ -1,7 +1,7 @@
 #!/bin/bash
 #-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*"
 #         File: scripts/format_clang_c_cpp.sh
-#               Format c and cpp staged files using file
+#               Format C/C++ staged sections
 #   Created by: vikgna
 #   Created on: 2021/01/15
 #  Modified by: vikgna

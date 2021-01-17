@@ -1,11 +1,11 @@
 #!/bin/bash
 #-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*"
 #         File: scripts/install_hooks.sh
-#               Install hooks by adding soft link
+#               Add symbolic link
 #   Created by: vikgna
 #   Created on: 2021/01/15
 #  Modified by: vikgna
-#  Modified on: 2021/01/15
+#  Modified on: 2021/01/17
 #      Version: 0.0.0
 #   How to run: bash ./install_hooks.sh
 #*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
