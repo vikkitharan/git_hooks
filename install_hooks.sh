@@ -6,7 +6,7 @@
 #   Created on: 2021/01/15
 #  Modified by: vikgna
 #  Modified on: 2021/01/17
-#      Version: 0.0.0
+#      Version: 1.0.0
 #   How to run: bash ./install_hooks.sh
 #*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 GIT_DIR=$(git rev-parse --git-dir)
