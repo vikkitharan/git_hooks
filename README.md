@@ -15,3 +15,12 @@ For further details are available in clang-format [webpage](https://clang.llvm.o
 ```
 bash ./install_hooks.sh
 ```
+
+
+# 2. Update ctags
+
+## Steps to install
+1. Install the hooks by bellow command
+```
+bash ./install_hooks.sh
+```
