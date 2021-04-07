@@ -9,6 +9,8 @@
 #      Version: 1.0.0
 #*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
+GIT_DIR=$(git rev-parse --git-dir)
+
 staged_files=$(git diff --name-only --staged | grep -E '\.(c|h|cpp|hpp)$')
 
 CLANG_FORMAT_CONFIG_FILE=".clang-format"
@@ -30,11 +32,11 @@ if [ -n "$staged_files" ]; then
     # 2. clang-format-diff.py formats those changes
     # But changes are not staged automatically
     if [[ $(git diff -U0 --no-color --cached $file | \
-      ./scripts/clang-format-diff.py -style=file -p1) ]]; then
+      $GIT_DIR/hooks/clang-format-diff.py -style=file -p1) ]]; then
 
       bad_format_files+=("${file}")
       git diff -U0 --no-color --cached $file | \
-        ./scripts/clang-format-diff.py -style=file -p1 -i
+        $GIT_DIR/hooks/clang-format-diff.py -style=file -p1 -i
    fi
   done
 
