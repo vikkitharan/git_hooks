@@ -9,5 +9,10 @@
 #      Version: 1.1.0
 #*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 set -e
+GIT_DIR=$(git rev-parse --git-dir)
+
+cd "${GIT_DIR}"
+cd ../
+
 git ls-files > files.txt
 ctags -L files.txt
