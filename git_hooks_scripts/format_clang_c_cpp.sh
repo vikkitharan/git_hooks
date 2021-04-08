@@ -5,8 +5,8 @@
 #   Created by: vikgna
 #   Created on: 2021/01/15
 #  Modified by: vikgna
-#  Modified on: 2021/01/17
-#      Version: 1.0.0
+#  Modified on: 2021/04/08
+#      Version: 1.2.0
 #*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 GIT_DIR=$(git rev-parse --git-dir)
