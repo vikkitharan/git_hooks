@@ -8,7 +8,9 @@
 # To enable this hook, rename this file to "pre-commit".
 
 # Call clang-format script
-./scripts/format_clang_c_cpp.sh
+
+GIT_DIR=$(git rev-parse --git-dir)
+$GIT_DIR/hooks/format_clang_c_cpp.sh
 
 if [ $? -ne 0 ]; then
     printf "Format check failed\n \

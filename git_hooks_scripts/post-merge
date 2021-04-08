@@ -1,0 +1,4 @@
+#!/bin/sh
+#
+GIT_DIR=$(git rev-parse --git-dir)
+$GIT_DIR/hooks/update_ctags.sh
