@@ -32,11 +32,11 @@ if [ -n "$staged_files" ]; then
     # 2. clang-format-diff.py formats those changes
     # But changes are not staged automatically
     if [[ $(git diff -U0 --no-color --cached $file | \
-      $GIT_DIR/hooks/clang-format-diff.py -style=file -p1) ]]; then
+      $GIT_DIR/hooks/scripts/clang-format-diff.py -style=file -p1) ]]; then
 
       bad_format_files+=("${file}")
       git diff -U0 --no-color --cached $file | \
-        $GIT_DIR/hooks/clang-format-diff.py -style=file -p1 -i
+        $GIT_DIR/hooks/scripts/clang-format-diff.py -style=file -p1 -i
    fi
   done
 

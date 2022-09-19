@@ -10,7 +10,7 @@
 # Call clang-format script
 
 GIT_DIR=$(git rev-parse --git-dir)
-$GIT_DIR/hooks/format_clang_c_cpp.sh
+$GIT_DIR/hooks/scripts/format_clang_c_cpp.sh
 
 if [ $? -ne 0 ]; then
     printf "Format check failed\n \
