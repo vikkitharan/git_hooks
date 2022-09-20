@@ -1,7 +1,7 @@
 #!/bin/bash
 #-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*"
 #         File: scripts/update_ctags.sh
-#               Create tag files
+#               Create tag files for git tracked files
 #   Created by: vikgna
 #   Created on: 2021/01/19
 #  Modified by: vikgna
