@@ -7,23 +7,12 @@
 #
 # To enable this hook, rename this file to "pre-commit".
 
-# Call clang-format script
-
-GIT_DIR=$(git rev-parse --git-dir)
-$GIT_DIR/hooks/format_clang_c_cpp.sh
-
-if [ $? -ne 0 ]; then
-    printf "Format check failed\n \
-      If you do not want to format, run git commit --no-verify. \n"
- exit 1
-fi
-
 if git rev-parse --verify HEAD >/dev/null 2>&1
 then
 	against=HEAD
 else
 	# Initial commit: diff against an empty tree object
-	against=4b825dc642cb6eb9a060e54bf8d69288fbee4904
+	against=$(git hash-object -t tree /dev/null)
 fi
 
 # If you want to allow non-ASCII filenames set this variable to true.
