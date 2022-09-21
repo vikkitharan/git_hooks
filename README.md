@@ -21,17 +21,15 @@ git clone git@github.com:vikkitharan/git_hooks.git /tmp/git_hooks
 ```
 $ git init --template /tmp/git_hooks/template
 ```
+
+If you want to use these hooks for an existing git repo, just issue above command. (Running git init in an existing repository is safe. It will not overwrite things that are already there. The primary reason for rerunning git init is to pick up newly added templates)
+
+
 or
 
 ```
 $ git clone https://github.com/githubtraining/hellogitworld  --template /tmp/git_hooks/template ./
 ```
-
-Or, if you want to use these hooks for an existing git repo, copy the hooks into ``` .git/hooks/```. )
-
- For example,
-
- ``` cp /tmp/git_hooks/template/hooks/* .git/hooks/ -r```
 
 
 
