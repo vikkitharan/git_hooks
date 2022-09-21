@@ -1,18 +1,23 @@
 #!/bin/bash
 #-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*"
 #         File: scripts/update_ctags.sh
-#               Create tag files for git tracked files
+#               List files and create tags
 #   Created by: vikgna
 #   Created on: 2021/01/19
-#  Modified by: vikgna
-#  Modified on: 2021/04/08
+#  Modified by: vikki
+#  Modified on: 2022/09/21
 #      Version: 1.2.0
 #*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 set -e
+CURRENT_DIR=$(pwd)
 GIT_DIR=$(git rev-parse --git-dir)
 
 cd "${GIT_DIR}"
-cd ../
+cd ..
 
-git ls-files > files.txt
-ctags -L files.txt
+# List all c and c++ files (git tracked)
+git ls-files | grep "\(\.h\|\.cpp\|\.c\)" > files_c.txt
+
+ctags -n -L files_c.txt -f tags_c
+
+cd "${CURRENT_DIR}"
