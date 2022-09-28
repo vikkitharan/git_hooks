@@ -49,4 +49,5 @@ if [ -n "$staged_files" ]; then
     exit 1
   fi
 
+  echo "Formatting done ..."
 fi
