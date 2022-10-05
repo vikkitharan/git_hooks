@@ -1,11 +1,15 @@
 #!/bin/bash
 #-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*"
 #     	File: fix_multiple_whitespaces.sh
-#           	Remove multiple whitespaces within the text
+#             (1) Substitute two or more spaces or tab between words by single space or tab
+#             (2) Remove leading space(s) followed by tab(s)
+#             need to support
+#             (1) update files after staged by map_cached_to_local()
+#             (2) include other file types in find_cached_files_lines()
 #   Created by: vikki
 #   Created on: 2022/09/27
 #  Modified by: vikki
-#  Modified on: 2022/09/27
+#  Modified on: 2022/10/06
 #  	Version: 1.0.0
 #*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
