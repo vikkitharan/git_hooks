@@ -11,11 +11,17 @@
 
 
 #########################################
-# find line numbers which are added or modified in staged
+# find line numbers which are added or modified in staged below file types
+# 1. tex
+# 2. txt
+#
 #########################################
 
 find_cached_files_lines () {
-  git diff --cached -U | gawk '
+  git diff --cached -U \
+  '***.tex' \
+  '***.txt' \
+  | gawk '
   match($0,"^+++ b/([[:alnum:]/._]+)", files){
   file=files[1]
 }
