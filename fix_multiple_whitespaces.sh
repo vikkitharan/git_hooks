@@ -52,6 +52,10 @@ map_cached_to_local() {
 
 ###########################################
 # Replace non leading multiple white space by a single space
+#  (1) No action for trailing whitespaces
+#  (2) Do not remove leading multiple spaces, tabs or tabs followed by spaces
+#  (3) + Remove multiple middle whitespaces
+#  (4) Remove leading spaces followed by a tab
 ###########################################
 fix_white_space() {
   for file_line in $(echo "$files_lines" | tr " " "\n");
@@ -59,10 +63,15 @@ fix_white_space() {
     file=$(echo "$file_line" | cut -d "," -f1)
     line_number_cached=$(echo "$file_line" | cut -d "," -f2)
     line_number_local=$(map_cached_to_local "$line_number_cached")
-    sed -i "${line_number_local}s/ \{1,\}/ /g" "$file"
+
+    # substitute two or more spaces or tab between words by single space or tab
+    sed -i "${line_number_local}s/\>\([[:blank:]]\)\{2,\}/\1/g" "$file"
+
   done
 }
 
 files_lines=$(find_cached_files_lines)
+
+echo $files_lines
 
 fix_white_space
