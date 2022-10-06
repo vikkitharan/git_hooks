@@ -25,6 +25,7 @@ find_cached_files_lines () {
   git diff --cached -U \
   '***.tex' \
   '***.txt' \
+  '***.md' \
   | gawk '
   match($0,"^+++ b/([[:alnum:]/._]+)", files){
   file=files[1]
