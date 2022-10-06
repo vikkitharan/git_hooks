@@ -78,6 +78,4 @@ fix_white_space() {
 
 files_lines=$(find_cached_files_lines)
 
-echo $files_lines
-
 fix_white_space
