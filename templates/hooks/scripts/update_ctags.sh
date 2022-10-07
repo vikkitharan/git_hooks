@@ -18,7 +18,7 @@ cd ..
 # List all c and c++ files (git tracked)
 c_files=$(git ls-files | grep "\(\.h$\|\.cpp$\|\.c$\)")
 
-if [ -z "$c_files" ]
+if [ ! -z "$c_files" ]
 then
   echo "$c_files" | tr " " "\n" > files_c.txt
   ctags -n -L files_c.txt -f tags_c
