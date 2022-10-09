@@ -5,8 +5,8 @@
 #   Created by: vikgna
 #   Created on: 2021/01/19
 #  Modified by: vikki
-#  Modified on: 2022/09/28
-#      Version: 1.3.0
+#  Modified on: 2022/10/08
+#      Version: 1.4.0
 #*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 set -e
 CURRENT_DIR=$(pwd)
@@ -18,10 +18,11 @@ cd ..
 # List all c and c++ files (git tracked)
 c_files=$(git ls-files | grep "\(\.h$\|\.cpp$\|\.c$\)")
 
-if [ ! -z "$c_files" ]
+if [ -n "$c_files" ]
 then
-  echo "$c_files" | tr " " "\n" > files_c.txt
-  ctags -n -L files_c.txt -f tags_c
+  # Run background and sequencially below two commands
+  { echo "$c_files" | tr " " "\n" > files_c.txt; \
+    ctags -n -L files_c.txt -f tags_c; } &
 fi
 
 cd "${CURRENT_DIR}"
