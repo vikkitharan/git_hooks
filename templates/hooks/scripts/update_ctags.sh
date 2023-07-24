@@ -5,10 +5,9 @@
 #   Created by: vikgna
 #   Created on: 2021/01/19
 #  Modified by: vikki
-#  Modified on: 2022/10/08
-#      Version: 1.4.0
+#  Modified on: 2023/07/25
+#      Version: 1.4.1
 #*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-set -e
 CURRENT_DIR=$(pwd)
 GIT_DIR=$(git rev-parse --git-dir)
 
