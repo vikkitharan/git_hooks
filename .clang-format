@@ -4,10 +4,10 @@ BasedOnStyle:  LLVM
 AccessModifierOffset: -2
 AlignAfterOpenBracket: Align
 AlignArrayOfStructures: Left
-AlignConsecutiveMacros: AcrossEmptyLinesAndComments
-AlignConsecutiveAssignments: AcrossEmptyLinesAndComments
-AlignConsecutiveBitFields: AcrossEmptyLinesAndComments
-AlignConsecutiveDeclarations: AcrossEmptyLinesAndComments
+AlignConsecutiveMacros: false
+AlignConsecutiveAssignments: false
+AlignConsecutiveBitFields: false
+AlignConsecutiveDeclarations: false
 AlignEscapedNewlines: Left
 AlignOperands:   Align
 AlignTrailingComments: true
@@ -96,7 +96,7 @@ IncludeCategories:
     CaseSensitive:   false
 IncludeIsMainRegex: '(Test)?$'
 IncludeIsMainSourceRegex: ''
-IndentAccessModifiers: true
+IndentAccessModifiers: false
 IndentCaseLabels: true
 IndentCaseBlocks: true
 IndentGotoLabels: true
