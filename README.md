@@ -39,6 +39,13 @@ This repository provides Git hooks to automatically check and enforce code forma
    rm .git/hooks/pre-commit .git/hooks/scripts/*
    ```
 
+   **For some version of git `git init` does not copy the hools and script. You may copy the scripts as in the following instruciton. I will check when time permits
+   ```bash
+   cp ~/tmp/git_hooks/templates/hooks/pre-commit .git/hooks/
+
+   cp ~/tmp/git_hooks/templates/hooks/scripts/ .git/hooks/ -r
+   ```
+
    **Note**: This step only adds hooks; it does not update Git tracking.
 
 ## Checking Formatting During `git commit`
