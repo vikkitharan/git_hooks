@@ -1,65 +1,191 @@
 # Git Hooks for C/C++ Formatting Using `clang-format`
 
-This repository provides Git hooks to automatically check and enforce code formatting for C and C++ files using `clang-format`.
+## Summary
 
-## Prerequisites
+- Ensures consistent C/C++ formatting across the repository
+- Enforces formatting automatically during git commit
+- Prevents formatting-related noise in code reviews
+- Improves developer productivity and code readability
 
-1. **Install `clang-format`**
-   Use the following command to install `clang-format` on your system:
-   ```bash
-   sudo apt-get install clang-format
-   ```
 
-2. **Create a `.clang-format` Configuration File**
-   Generate a `clang-format` configuration file and save it in your Git repository directory:
-   ```bash
-   clang-format -style=llvm -dump-config > ./.clang-format
-   ```
-   The above command generates a configuration using the LLVM style. Other available styles include Google, Chromium, Mozilla, and WebKit. For more information, visit the [clang-format documentation](https://clang.llvm.org/docs/ClangFormat.html).
+This document currently targets Ubuntu Linux.
+Support for Windows will be added in the future.
 
-   Or you can update the Configurations as you wish.
+## Reference
+- [ClangFormat](https://clang.llvm.org/docs/ClangFormat.html)
+- [Clang-Format Style Options](https://clang.llvm.org/docs/ClangFormatStyleOptions.html)
+- [Customizing Git - Git Hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks)
 
-## Adding Git Hooks
 
-1. **Clone This Repository**
-   Clone this repository to a directory, for example, `~/tmp/git_hooks`:
-   ```bash
-   git clone git@github.com:vikkitharan/git_hooks.git ~/tmp/git_hooks
-   ```
 
-2. **Apply the Hooks to Your Repository**
-   Create or update your repository by running the following command:
-   ```bash
-   git init --template ~/tmp/git_hooks/template
-   ```
-   **Note**: Running `git init` in an existing repository will not overwrite existing settings. This step is to apply the newly added hooks and auxiliary files.
+## 1.a Ubuntu: Install `clang-format` tool
 
-   **If hooks and auxiliary files are not updated**, remove the existing hooks and auxiliary files before rerunning the command:
-   ```bash
-   rm .git/hooks/pre-commit .git/hooks/scripts/*
-   ```
+The `clang-format` **checks and enforces code formatting** for C/C++ files using.
 
-   **For some version of git `git init` does not copy the hools and script. You may copy the scripts as in the following instruciton. I will check when time permits
-   ```bash
-   cp ~/tmp/git_hooks/templates/hooks/pre-commit .git/hooks/
-
-   cp ~/tmp/git_hooks/templates/hooks/scripts/ .git/hooks/ -r
-   ```
-
-   **Note**: This step only adds hooks; it does not update Git tracking.
-
-## Checking Formatting During `git commit`
-
-Once the hooks are added, they will automatically check the formatting of any modified C/C++ files during the commit process. If there are any formatting violations, the commit will be rejected, and instructions will be provided to fix them.
-
-**Note**: Only modified lines are checked and corrected (though some surrounding code might also be updated).
-
-## Formatting a File Manually
-
-If you need to format an existing file, use the following command:
 ```bash
-clang-format -i -style=file <file-path>
+sudo apt-get install clang-format
 ```
-This command applies the formatting rules defined in the `.clang-format` file to the entire file.
----
 
+Verify the installation:
+
+```bash
+clang-format --version
+```
+
+## 1.b Windows: Install `clang-format` tool
+
+Open **PowerShell** (or Windows Terminal) and run:
+
+```bash
+winget install -e --id LLVM.ClangFormat
+```
+
+### Verify `clang-format` is available in your Git terminal
+```bash
+clang-format --version
+which clang-format
+```
+
+## 2. Create a `.clang-format` configuration file
+
+If you do not already have a `clang-format` configuration file, generate one and save it in the **root of your Git repository**:
+
+```bash
+clang-format -style=llvm -dump-config > .clang-format
+```
+
+This command generates a configuration based on the **LLVM** style.
+Other predefined styles include:
+- Chromium
+- GNU
+- Google
+- LLVM
+- Microsoft
+- Mozilla
+- WebKit
+
+You can customise the generated `.clang-format` file to match your project’s coding standards.
+
+For more details, visit the [clang-format official documentation](https://clang.llvm.org/docs/ClangFormat.html).
+
+## 3. Format a file by `clang-format` command
+
+Create the following intentionally ill-formatted C file and save it as test_format.c:
+
+```bash
+#include<stdio.h>
+
+// Programmers should focus on the logic rather than where to add brackets, whitespace, or break a long line. Distraction kills productivity and logical thinking. 
+      //Let's make clang-format do this boring formatting task while we focus on interesting stuff.  
+
+int   add(int a,int b){
+return a+b;}
+
+int main( ){
+int x=10 ; // Should we have space before, after?
+int yyyy             =20;//or both before and after '='?
+ if(x<yyyy){
+printf("sum=%d\n",add(x,yyyy));}
+else{
+printf("no sum\n");}
+return 0;}
+```
+
+Run the following command:
+```bash
+clang-format -i -style=file test_format.c
+```
+
+This command format the entire file according to the `.clang-format`.
+
+
+
+## 4. Automate code format by git hooks
+
+Once Git hooks are installed:
+- `git commit` command automatically checks and formats
+- Only **modified C/C++ codes** are formatted
+- If formatting violations are found:
+  - The `git commit` command is **rejected**
+  - Clear instructions are printed on how to apply the format or skip if necessary
+
+## 4.1. Clone the git hooks repo
+
+Clone the hooks repository to a local directory:
+
+```bash
+git clone git@github.com:vikkitharan/git_hooks.git /home/vikki/source/git_hooks
+```
+
+
+### 2 Apply the hooks to an existing repo or create a new git repo with the hooks
+
+Run this command inside an existing Git repository,
+or inside a directory where you want to create a new repository:
+```bash
+git init --template=/home/vikki/source/git_hooks/template
+```
+
+**Note**:
+Running `git init` inside an existing repository will **not overwrite existing settings or history**. This step only installs the hooks and supporting scripts.
+
+After this step, the following files should exist:
+```bash
+$ tree .git/hooks/
+.git/hooks/
+├── pre-commit
+└── scripts
+    ├── clang-format-diff.py
+    └── format_clang.sh
+```
+
+Ensure a `.clang-format` file exists in the repository root (described previously)
+
+
+### 3 Verify: Automation works
+
+Stage the intentionally ill-formatted file and attempt a commit:
+
+```bash
+git add test_format.c
+git commit -m "Verify git hooks"
+```
+
+If the hooks are working correctly, you should see output similar to:
+
+```bash
+ERROR: clang-format check failed
+
+The following file(s) had formatting issues and were automatically fixed:
+  - test_format.c
+
+The corrected changes are NOT staged.
+
+Next steps:
+  1. Review the formatting changes:
+       git difftool
+  2. Stage the corrected file(s):
+       git add -p test_format.c
+  3. Re-run the commit:
+       git commit
+
+To bypass this check (if really necessary):
+  git commit --no-verify
+```
+
+## 6. Troubleshooting: Hooks Not Installed
+If the file is not formated or you do not see the message above, the git hook or scripts may not have been copied correctly.
+
+For older git versions, `git init --template` may **not copy hooks and scripts correctly**. In that case, copy them manually
+
+
+```bash
+cp ~/tmp/git_hooks/templates/hooks/pre-commit .git/hooks/
+cp -r ~/tmp/git_hooks/templates/hooks/scripts/ .git/hooks/
+```
+
+Ensure the hooks are executable:
+```bash
+chmod +x .git/hooks/pre-commit
+chmod +x .git/hooks/scripts/*
+```
